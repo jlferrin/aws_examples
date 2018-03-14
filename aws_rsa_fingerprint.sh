@@ -1,0 +1,5 @@
+
+
+openssl rsa -in $1 -pubout -outform DER | openssl md5 -c
+
+
