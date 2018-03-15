@@ -1,0 +1,100 @@
+
+## Amazon Linux
+
+### Red
+
+VPC: 10.10.0.0/16
+
+Subnet Priv1:
+  AZ: a
+  CIDR: 10.10.10.0/24
+
+Subnet Priv2:
+  AZ: b
+  CIDR: 10.10.20.0/24
+
+Subnet Pub1:
+  AZ: a
+  CIDR: 10.10.110.0/24
+
+Subnet Pub2:
+  AZ: b
+  CIDR: 10.10.120.0/24
+
+InternetGW: VPC
+
+Route Tables: Default IGW: Pub1 y Pub2.
+
+### Habilitar EPEL
+
+```
+$ sudo yum-config-manager --enable epel
+$ sudo yum repolist
+```
+
+### Insalar TinyProxy
+
+```
+$ sudo yum install tinyproxy
+```
+
+### Configuramos TinyProxy
+
+Configuracion por defecto y añadimos las reglas:
+
+```
+Allow 10.10.10.0/24
+Allow 10.10.20.0/24
+```
+
+### Arrancamos TinyProxy
+
+```
+$ sudo chkconfig  tinyproxy on
+$ sudo service tinyproxy start
+```
+
+### Probamos TinyProxy
+
+```
+$ sudo yum install lynx
+$ export http_proxy=http://localhost:8888/
+$ lynx www.google.com
+
+$ sudo cat /var/log/tinyproxy/tinyproxy.log
+...
+CONNECT   Mar 14 23:29:18 [2747]: Connect (file descriptor 6): localhost [127.0.0.1]
+CONNECT   Mar 14 23:29:18 [2747]: Request (file descriptor 6): GET http://www.google.com/ HTTP/1.0
+INFO      Mar 14 23:29:18 [2747]: No upstream proxy for www.google.com
+CONNECT   Mar 14 23:29:18 [2747]: Established connection to host "www.google.com" using file descriptor 7.
+INFO      Mar 14 23:29:19 [2747]: Closed connection between local client (fd:6) and remote client (fd:7)
+CONNECT   Mar 14 23:29:32 [2748]: Connect (file descriptor 6): localhost [127.0.0.1]
+CONNECT   Mar 14 23:29:32 [2748]: Request (file descriptor 6): GET http://www.google.ie/?gws_rd=cr&dcr=0&ei=T7CpWu7-CszYjwOjroK4Dg HTTP/1.0
+INFO      Mar 14 23:29:32 [2748]: No upstream proxy for www.google.ie
+CONNECT   Mar 14 23:29:32 [2748]: Established connection to host "www.google.ie" using file descriptor 7.
+INFO      Mar 14 23:29:32 [2748]: Closed connection between local client (fd:6) and remote client (fd:7)
+```
+
+Configuración (/etc/environment) :
+
+	export http_proxy=http://localhost:8888/
+	export https_proxy=http://localhost:8888/
+	export ftp_proxy=http://localhost:8888/
+	export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+	export HTTP_PROXY=http://localhost:8888/
+	export HTTPS_PROXY=http://localhost:8888/
+	export FTP_PROXY=http://localhost:8888/
+	export NO_PROXY="localhost,127.0.0.1,localaddress,.localdomain.com"
+
+#### Otras configuraciones:
+
+*Yum Package Manager*
+
+yum proxy settings can be found in the file system at /etc/yum.conf
+
+Add a line to the file with the following information:
+
+		proxy=http://:
+
+The next time you run yum, it will pick up that proxy.
+
