@@ -2,11 +2,11 @@
 
  yum-config-manager --enable epel
  yum -y install tinyproxy
- echo 'Allow 10.68.10.0/24' >> /etc/tinyproxy/tinyproxy.conf 
- echo 'Allow 10.68.20.0/24' >> /etc/tinyproxy/tinyproxy.conf 
- echo 'Allow 10.68.110.0/24' >> /etc/tinyproxy/tinyproxy.conf 
- echo 'Allow 10.68.120.0/24' >> /etc/tinyproxy/tinyproxy.conf 
- echo 'Listen 10.68.110.11' >> /etc/tinyproxy/tinyproxy.conf 
+ echo 'Allow 10.100.10.0/24' >> /etc/tinyproxy/tinyproxy.conf 
+ echo 'Allow 10.100.20.0/24' >> /etc/tinyproxy/tinyproxy.conf 
+ echo 'Allow 10.100.110.0/24' >> /etc/tinyproxy/tinyproxy.conf 
+ echo 'Allow 10.100.120.0/24' >> /etc/tinyproxy/tinyproxy.conf 
+ echo 'Listen 10.100.110.11' >> /etc/tinyproxy/tinyproxy.conf 
  chkconfig tinyproxy on
  service tinyproxy start
  

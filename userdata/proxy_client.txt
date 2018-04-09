@@ -1,15 +1,15 @@
 #!/bin/bash
 
 echo "# - Inicio - VPC Proxy config" >> /etc/profile
-echo "export http_proxy=http://10.68.110.11:8888/" >> /etc/profile
-echo "export https_proxy=http://10.68.110.11:8888/" >> /etc/profile
-echo "export ftp_proxy=http://10.68.110.11:8888/" >> /etc/profile
+echo "export http_proxy=http://10.100.110.11:8888/" >> /etc/profile
+echo "export https_proxy=http://10.100.110.11:8888/" >> /etc/profile
+echo "export ftp_proxy=http://10.100.110.11:8888/" >> /etc/profile
 echo "export no_proxy="169.254.169.254,localhost,127.0.0.1,localaddress,.localdomain.com" >> /etc/profile
-echo "export HTTP_PROXY=http://10.68.110.11:8888/" >> /etc/profile
-echo "export HTTPS_PROXY=http://10.68.110.11:8888/" >> /etc/profile
-echo "export FTP_PROXY=http://10.68.110.11:8888/" >> /etc/profile
+echo "export HTTP_PROXY=http://10.100.110.11:8888/" >> /etc/profile
+echo "export HTTPS_PROXY=http://10.100.110.11:8888/" >> /etc/profile
+echo "export FTP_PROXY=http://10.100.110.11:8888/" >> /etc/profile
 echo "export NO_PROXY="169.254.169.254,localhost,127.0.0.1,localaddress,.localdomain.com" >> /etc/profile
-yum-config-manager --setopt=proxy="http://10.68.110.11:8888/:" --save
+yum-config-manager --setopt=proxy="http://10.100.110.11:8888/:" --save
 echo "# - Fin - VPC Proxy config" >> /etc/profile
 
 
