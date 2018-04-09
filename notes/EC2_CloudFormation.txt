@@ -1,0 +1,2 @@
+eu_west1 - amzn-ami-hvm-2017.09.1.20180307-x86_64-gp2 (ami-3bfab942)
+
